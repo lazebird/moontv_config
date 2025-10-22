@@ -1,5 +1,6 @@
 name: Generate Clash Rule Provider
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'config初始.json'
