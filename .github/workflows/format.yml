@@ -24,7 +24,7 @@ jobs:
         uses: lazebird/tvconfig_formatter-action@main
         with:
           config_path: input.json
-          output_path: output/omnibox.yaml
+          output_path: output/omnibox.json
           format: omnibox
           
       - name: Commit and push changes
