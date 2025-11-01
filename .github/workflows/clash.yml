@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'config初始.json'
+      - 'input.json'
 
 jobs:
   build:
@@ -12,17 +13,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate rule provider
-        uses: lazebird/tvconfig2clash-action@main
+      - name: Generate Clash rule provider
+        uses: lazebird/tvconfig_formatter-action@main
         with:
           config_path: config初始.json
           output_path: output/site.yaml
+          format: clash
 
+      - name: Generate Omnibox configuration
+        uses: lazebird/tvconfig_formatter-action@main
+        with:
+          config_path: input.json
+          output_path: output/omnibox.yaml
+          format: omnibox
+          
       - name: Commit and push changes
         run: |
           mkdir -p output
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/site.yaml
-          git commit -m "chore: update output/site.yml via test workflow [skip ci]" || echo "No changes to commit"
+          git add output/*
+          git commit -m "chore: update output/ via test workflow [skip ci]" || echo "No changes to commit"
           git push
