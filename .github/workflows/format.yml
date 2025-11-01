@@ -1,4 +1,4 @@
-name: Generate Clash Rule Provider
+name: Generate Clash Rule Provider & OmniBox Config
 on:
   workflow_dispatch:
   push:
